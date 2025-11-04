@@ -1,0 +1,34 @@
+<%= link_to show_cart_path, class: "back-arrows" do %>
+  <%= image_tag "Arrow-Back.svg", alt: "Back" %>
+  <div>Zurück zum Warenkorb</div>
+<% end %>
+<h1>Checkout</h1>
+
+<div class="checkout-form">
+  <%= form_with model: @order, url: complete_order_path, method: :post, local: true do |form| %>
+    <div>
+      <%= form.label :name, "Name*" %>
+      <%= form.text_field :name, placeholder: "Dein Name" %>
+    </div>
+    <div>
+      <%= form.label :email, "Email*" %>
+      <%= form.email_field :email, placeholder: "Deine Email"  %>
+    </div>
+    <div>
+      <%= form.label :address, "Straße und Hausnummer*" %>
+      <%= form.text_field :address, placeholder: "z.B. Musterstraße 10"  %>
+    </div>
+    <div>
+      <%= form.label :zip_code, "Postleitzahl" %>
+      <%= form.text_field :zip_code, placeholder: "z.B. 5020" %>
+    </div>
+      <div>
+      <%= form.label :city, "Stadt" %>
+      <%= form.text_field :city, placeholder: "z.B. Musterstadt" %>
+    </div>
+    <div>
+      <%= form.submit "Complete Purchase" %>
+    </div>
+  <% end %>
+  <p>Felder die mit * markiert sind, sind verpflichtend</p>
+</div>

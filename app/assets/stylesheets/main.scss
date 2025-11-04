@@ -1,0 +1,217 @@
+/*
+* This is a manifest file that'll be compiled into application.css.
+*
+* With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+* application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+* cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+* depending on specificity.
+*
+* Consider organizing styles into separate files for maintainability.
+*/
+@import "variables";
+
+* {
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+}
+
+main {
+   display: flex;
+   flex-direction: column;
+   min-height: 60vh;
+}
+
+body {
+   font-family: 'Inter';
+   background-color: var(--bg-color);
+   padding-inline: 10%;
+   min-height: 60vh;
+}
+
+p {
+   font-weight: light;
+   hyphens: auto;
+   overflow-wrap: break-word;
+   word-wrap: break-word;
+   margin-bottom: 1.5em;
+   max-width: 75ch;
+   font-size: 13pt;
+   line-height: 1.4;
+   color: var(--accent-color);
+}
+
+a {
+   font-size: 15pt;
+   font-weight: bold;
+   color: var(--accent-color);
+   text-decoration: none;
+}
+
+strong {
+   font-weight: bold;
+}
+
+a:hover {
+   opacity: 0.8;
+}
+
+h1 {
+   color: var(--accent-color);
+   font-size: 24pt;
+   font-weight: 800;
+   margin-bottom: 10px;
+}
+
+h2 {
+   color: var(--accent-color);
+   font-size: 20pt;
+   font-weight: bold;
+   margin-bottom: 20px;
+}
+
+h3 {
+   color: var(--accent-color);
+   font-size: 18pt;
+   font-weight: 500;
+
+}
+
+img {
+   max-width: 300px;
+   height: auto;
+   border-radius: 4px;
+}
+
+button {
+   background-color: var(--bg-color);
+   font-weight: bold;
+   padding: 10px 20px;
+   cursor: pointer;
+   border: solid 3px var(--accent-color);
+   border-radius: 20pt;
+}
+
+button:hover {
+   background-color: #ffdeca;
+}
+
+.link-button {
+   all: unset;
+   background-color: var(--bg-color);
+   font-weight: bold;
+   padding: 10px 20px;
+   cursor: pointer;
+   border: solid 3px var(--accent-color);
+   border-radius: 20pt;
+}
+
+.link-button:hover {
+   background-color: #ffdeca;
+}
+
+input {
+   border: 2.5px solid var(--accent-color);
+   width: 50%;
+   padding: 0.5em;
+   font-weight: bold;
+   cursor: pointer;
+   background-color: var(--bg-color);
+   padding: 10px 20px;
+   margin-bottom: 1em;
+
+   &:hover {
+      opacity: 0.8;
+   }
+}
+
+input[type="submit"] {
+   width: 35%;
+   border-radius: 30px;
+
+   &:hover {
+      background-color: #ffdeca;
+   }
+}
+
+input[type='checkbox'] {
+   display: block;
+   position: absolute;
+   top: 1em;
+   right: 1em;
+   width: 2em;
+   height: 2em;
+   opacity: 0;
+   cursor: pointer;
+}
+
+input[type="radio"] {
+   appearance: none;
+   width: 1.5rem;
+   height: 1.5rem;
+   border: 2.5px solid var(--accent-color);
+   outline: none;
+   cursor: pointer;
+   margin-right: 0.5rem;
+   position: relative;
+}
+
+input[type="radio"]:checked::before {
+   content: '';
+   display: block;
+   width: 0.75rem;
+   height: 0.75rem;
+   border-radius: 50%;
+   background-color: var(--accent-color);
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+#amount {
+   width: 70px;
+   padding: 0.5rem;
+}
+
+@media (max-width: $mobile) {
+   p {
+      font-size: 12pt;
+   }
+
+   input {
+      width: 100%;
+   }
+
+   h1 {
+      font-size: 20pt;
+   }
+
+   h2 {
+      font-size: 18pt;
+   }
+
+   h3 {
+      font-size: 16pt;
+   }
+
+   input[type="submit"] {
+      width: 50%;
+      border-radius: 30px;
+   
+      &:hover {
+         background-color: #ffdeca;
+      }
+   }
+}
+
+.back-arrows {
+   display: flex;
+   align-items: center;
+   margin-bottom: 1em;
+   max-width: fit-content;
+
+   div {
+      padding-left: 0.8em;
+   }
+}

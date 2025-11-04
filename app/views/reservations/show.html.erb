@@ -1,0 +1,35 @@
+  <%= link_to reservations_path, class: "back-arrows" do %>
+  <%= image_tag "Arrow-Back.svg", alt: "Back" %>
+  <div>Zurück zur Übersicht</div>
+  <% end %>
+
+<h1>Reservierungsdetails</h1>
+<p>
+<br>
+  <strong>Datum:</strong>
+  <%= @reservation.reservation_date.strftime("%d.%m.%Y") %>
+</p>
+
+<p>
+  <strong>Uhrzeit:</strong>
+  <%= @reservation.reservation_time.strftime("%H:%M") %>
+  Uhr
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @reservation.name %>
+</p>
+
+<p>
+  <strong>E-Mail:</strong>
+  <%= @reservation.email %>
+</p>
+
+<p>
+  <strong>Tisch:</strong>
+  <%= @reservation.table.table_id %>
+</p>
+
+<%= form_with model: @reservation, url: reservation_path(@reservation), method: :delete, local: true do %>
+<% end %>

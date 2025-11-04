@@ -1,0 +1,30 @@
+<div class="res-wrapper">
+  <h1>Alle Reservierungen</h1>
+  <li><%= link_to 'Neue Reservierung', new_reservation_path, class: 'link-button' %></li>
+
+  <div class="table-responsive">
+    <table>
+      <thead>
+        <tr class="table-header">
+          <th>Datum</th>
+          <th>Uhrzeit</th>
+          <th>Name</th>
+          <th>E-Mail</th>
+          <th>Tisch</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @reservations.each do |reservation| %>
+          <tr>
+            <td><%= reservation.reservation_date.strftime("%d.%m.%Y") %></td>
+            <td><%= reservation.reservation_time.strftime("%H:%M") %> Uhr</td>
+            <td><%= reservation.name %></td>
+            <td><%= reservation.email %></td>
+            <td>Tisch <%= reservation.table.table_id %></td>
+            <td><%= link_to 'Anzeigen', reservation_path(reservation) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

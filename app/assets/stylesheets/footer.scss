@@ -1,0 +1,21 @@
+@import 'variables';
+
+footer {
+
+    border-top: 2.5px solid var(--accent-color);
+    margin-top: 50px;
+
+    p {
+        margin-top: 2em;
+    }
+
+    a {
+        font-size: 13pt;
+        font-weight: light;
+        color: blue;
+    }
+
+    #copyright {
+        margin-bottom: 3em;
+    }
+}

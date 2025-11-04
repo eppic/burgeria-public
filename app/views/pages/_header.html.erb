@@ -1,0 +1,39 @@
+<header>
+    <a href="/"><%= image_tag "burgeria-full.svg", alt: "Logo" %></a>
+    <nav>
+        <label for='burger-menu' tabindex="0" id="burger-icon">
+            <%= image_tag "Menu.svg", alt: "Menu" %>
+        </label>
+        <input type='checkbox' id='burger-menu'>
+        <ul>
+            <li><%= link_to "Unser Menü", menus_path %></li>
+            <li><%= link_to "Reservierung", reservations_path %></li>
+            <li><%= link_to "Über uns", about_path %></li>
+
+            <li>
+                <%= link_to show_cart_path do %>
+                    <%= image_tag("cart.svg", alt: "Warenkorb") %>
+                    <% if cart_item_count > 0 %>
+                        <span id="cart-count"><%= cart_item_count %></span>
+                    <% end %>
+                <% end %>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const burgerMenu = document.getElementById('burger-menu');
+        const burgerIcon = document.getElementById('burger-icon');
+
+        burgerMenu.addEventListener('change', function() {
+            if (burgerMenu.checked) {
+                burgerIcon.innerHTML = '<%= image_tag "Close.svg", alt: "Close Menu" %>';
+            } else {
+                burgerIcon.innerHTML = '<%= image_tag "Menu.svg", alt: "Menu" %>';
+            }
+        });
+    });
+
+</script>

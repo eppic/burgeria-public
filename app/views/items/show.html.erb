@@ -1,0 +1,36 @@
+<div>
+  <%= link_to menus_path, class: "back-arrows" do %>
+    <%= image_tag "Arrow-Back.svg", alt: "Back" %>
+    <div>Zurück zum Menü</div>
+  <% end %>
+</div>
+
+<h1><%= @item.name %></strong><br></h1>
+<div class="item-page">
+  <div class="item-image">
+    <% if @item.image.present? %>
+      <%= image_tag "menu/#{@item.image}", alt: "#{@item.name} image" %>
+    <% else %>
+      <%= image_tag "placeholder.jpg", alt: "Default image" %>
+    <% end %>
+  </div>
+  <div class="item-text">
+    <strong>Inhalte:</strong> <%= @item.ingredients.join(', ') %><br>
+    <strong>Allergene:</strong> <%= @item.allergies.join(', ') %><br>
+    <strong>Preis:</strong> €<%= @item.price %><br>
+
+    <%= form_with url: add_to_cart_path(@item), method: :post, local: true, id: "add-button" do |form| %>
+      <strong>Menge:</strong> 
+      <%= form.number_field :amount, value: 1, min: 1, max: 99, step: 1 %>
+      <%= form.submit "Hinzufügen" %>
+    <% end %>
+    <div id="order-message" style="display:none">Bestellung hinzugefügt!</div>
+  <%= link_to "Gehe zum Warenkorb", show_cart_path %>
+  </div>
+</div>
+
+<script>
+  document.getElementById("add-button").addEventListener("submit", function(event) {
+    document.getElementById("order-message").style.display = "block";
+  });
+</script>

@@ -1,0 +1,89 @@
+<h1>Reserviere einen Tisch</h1>
+<p>Direkt hier auf unserer Website.</p>
+<br>
+
+<% if @reservation.errors.any? %>
+<div id="error_explanation">
+  <h2>Ihre Reservierung konnte nicht gespeichert werden</h2>
+    <ul>
+      <% @reservation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+</div>
+<% end %>
+
+<section>
+  <h2>Unsere Geschäftszeiten</h2>
+  <ul class="business-hours">
+    <% BusinessHour.order(:id).each do |hour| %>
+      <br>
+      <li>
+        <%= hour.day_of_week %>
+        <% if hour.is_closed %>
+          Geschlossen
+        <% else %>
+          <%= hour.open_time.strftime("%H:%M") %> - <%= hour.close_time.strftime("%H:%M") %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</section>
+<br>
+
+<div class="res-time">
+    <h2>Wann kommst du vorbei?</h2>
+    <%= form_with model: @reservation, data: { turbo: false } do |form| %>
+      <div class="res-date">
+        <div class="svg-label">
+        <%= image_tag "Calendar.svg", alt: "Datum" %>
+        <%= form.label :reservation_date, "Datum" %>
+        </div>
+          <%= form.date_field :reservation_date, min: Date.today %>
+      </div>
+      <div class="res-time">
+        <div class="svg-label">
+          <%= image_tag "Clock.svg", alt: "Uhrzeit" %>
+          <%= form.label :reservation_time, "Uhrzeit" %>
+        </div>
+          <%= form.time_field :reservation_time, min: "11:00", max: "22:00" %>
+      </div>
+  </div>
+  <div class="res-table">
+    <h2>Wo willst du sitzen?</h2>
+    <%= image_tag "Table_plan.svg", alt: "Tischplan" %>
+    <div class="tables">
+      <% grouped_tables = @available_tables.group_by(&:max_capacity) %>
+      <% grouped_tables.each do |capacity, tables| %>
+        <div class="table-group">
+          <h3><%= capacity %> Personen:</h3>
+          <% tables.each do |table| %>
+            <div class="table">
+            <%= form.label :table_id, "Tisch #{table.id}", value: table.id %>
+            <%= form.radio_button :table_id, table.id %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <h2>Kontaktdaten</h2>
+  <div class="res-contact">
+    <%= form.label :name, "Name" %>
+    <%= form.text_field :name, placeholder: "Name" %>
+  </div>
+  <div class="res-contact">
+    <div class="svg-label">
+      <%= image_tag "Mail.svg", alt: "Email" %>
+      <%= form.label :email, "E-Mail" %>
+    </div>
+    <%= form.email_field :email, placeholder: "E-Mail", pattern: "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$", title: "Bitte gib eine gültige E-Mail-Adresse ein." %>
+  </div>
+  <p>Damit wir dich im Notfall erreichen können.</p>
+  <div>
+    <%= form.submit "Reservieren" %>
+  </div>
+  <p>Disclaimer: Deine Daten werden öffentlich sichtbar sein</p>
+  <% end %>
+</div>

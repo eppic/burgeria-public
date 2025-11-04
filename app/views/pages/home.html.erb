@@ -1,0 +1,29 @@
+<section class="home">
+    <h1>Eine wahre Geschmacksexplosion</h1>
+    <%= image_tag "home-1.jpg", alt: "Bild von einer Person mit einem Burger", class: "home-img" %>
+    <p>
+        Bei Burgeria stehen Qualität und Geschmack an erster Stelle. Unsere Burger werden täglich frisch zubereitet um unseren Kunden die bestmögliche Erfahrung zu bieten. Unsere Speisekarte bietet eine große Auswahl: Von klassischen Burgern bis hin zu außergewöhnlichen, fast schon ulkigen Burgern.  Auch Vegetarier und Veganer finden bei uns leckere Alternativen. Wenn du jetzt überzeugt bist, dass komm und Besuch uns, oder lass dir was leckeres liefern!
+    </p>
+</section>
+
+<div class="rec-wrapper">
+    <h2>Unsere Empfehlungen</h2>
+    <section class="recommendations">
+        <% @random_items.each do |item| %>
+          <div>
+            <%= link_to item_path(item) do %>
+                <%= image_tag("menu/#{item.image.presence || 'placeholder.jpg'}", alt: item.name) %>
+              <h3><%= item.name %></h3>
+            <% end %>
+          </div>
+        <% end %>
+    </section>
+    <%= button_to "Zum Menü", menus_path, method: :get, class: "button" %>
+</div>
+
+<section class="about">
+    <h2>Über uns</h2>
+    <%= image_tag "home-2.jpg", alt: "Bild von einem Restaurant, innen." %>
+    <p>Unsere Burgeria befindet sich in einem lebendigen Viertel, in dem sich urbane Street-Art und gemütliche Cafés an jeder Ecke tummeln. Von außen lockt dich unser freundliches, farbenfrohes Design; innen erwartet dich eine offene Raumgestaltung mit Holztischen und großen Fenstern. Wenn du bei uns Platz nimmst, hast du einen Blick auf die pulsierende Straße und kannst das Treiben in der Nachbarschaft beobachten. Dank der zentralen Lage sind wir leicht zu erreichen und bleiben dennoch ein entspannter Rückzugsort, um saftige Burger und gute Gesellschaft zu genießen.</p>
+    <%= button_to "Jetzt Reservieren!", reservations_path, method: :get, class: "button" %>
+</section>

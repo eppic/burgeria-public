@@ -1,0 +1,120 @@
+@import "variables";
+
+.home {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+        font-size: 30pt;
+    }
+
+    .home-img {
+        max-width: 100%;
+        max-height: 100%;
+        margin: 35px 0 35px;
+        ;
+    }
+
+    p {
+        text-align: left;
+    }
+
+}
+
+.rec-wrapper {
+    margin-bottom: 40px;
+    max-width: 100%;
+
+    .recommendations {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: stretch;
+        gap: 20px;
+
+        div {
+            flex: 1 1 auto;
+            box-sizing: border-box;
+            transition: transform 0.1s ease;
+
+            a {
+
+                h3 {
+                    font-weight: bold;
+                }
+
+                &:hover {
+                    transform: scale(1.03);
+                }
+
+                img {
+                    height: 200px;
+                    max-width: 600px;
+                    width: 100%;
+                    object-fit: cover;
+                    margin-bottom: 2rem;
+                }
+
+                text-decoration: none;
+            }
+
+        }
+    }
+
+    form {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: $mobile) {
+    .recommendations {
+        div {
+            a {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                img {
+                    width: 200px!important;
+                    padding-right: 2rem;
+                    margin-bottom: 0;
+                }
+
+                &:hover {
+                    transform: none;
+                }
+            }
+
+        }
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .home {
+        h1 {
+           font-size: 20pt;
+        }
+     }
+}
+
+.about {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    img {
+        max-width: 100%;
+        max-height: 100%;
+        margin-bottom: 35px;
+    }
+
+    form {
+        display: flex;
+        justify-content: flex-end;
+    }
+}

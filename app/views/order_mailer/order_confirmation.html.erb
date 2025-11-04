@@ -1,0 +1,8 @@
+<h1>Vielen Dank für deine Bestellung <%= @order.name %>!</h1>
+<p>Deine Bestellung:</p>
+<ul>
+  <% @items.each do |item| %>
+    <li><%= item[:name] %> - Menge: <%= item[:amount] %></li>
+  <% end %>
+</ul>
+<p>Ihre Bestellung wird in 30 Minuten abholbereit sein</p>

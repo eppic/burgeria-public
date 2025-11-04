@@ -1,0 +1,36 @@
+@import 'base';
+
+:root {
+  // COLORS
+  --bg-color: #FDF5E6;
+  --accent-color: #33280D;
+}
+
+// BREAKPOINTS
+$mobile: 899px;
+$desktop: 600px;
+
+// VIEWPORT BASED VARIABLES
+:root {
+  --stf: 1rem; // standard font-size 16px;
+  --fss: 1.375rem; // font-size small 22px
+  // more font-sizes
+  --stp: 1rem; // standard padding or margin 16px
+  // more paddings
+  --bp: 4.5rem; // standard padding for sections/components
+}
+
+@include breakpoint($desktop) {
+  :root {
+    --stf: 1.25rem; // standard font-size 20px
+    --fss: 2.125rem; // font-size small 34px
+    // ...
+    --stp: 2.5rem; // standard-padding 20px
+    // ...
+    --bp: calc(3rem + 2vw);
+  }
+}
+
+@include breakpoint($desktop) {
+  // your styles
+}

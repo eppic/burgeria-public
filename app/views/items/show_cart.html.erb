@@ -1,0 +1,40 @@
+<div class="cart-wrapper">
+
+  <%= link_to menus_path, class: "back-arrows" do %>
+  <%= image_tag "Arrow-Back.svg", alt: "Back" %>
+  <div>Zurück zum Menü</div>
+  <% end %>
+
+  <h1>Dein Warenkorb</h1>
+
+  <% if @items.any? %>
+    <ul>
+      <% @items.each do |item| %>
+        <li>
+          <%= image_tag "menu/#{item.image}", alt: "#{item.name} image", class: "menu-item-image" %>
+          <div class="item-info">
+            <h2><%= link_to item.name, item_path(item) %></h2>
+            <span class="price"><%= item.amount %> x <%= number_to_currency(item.price, unit: "€") %></span>
+
+            <%= form_with url: add_to_cart_path(item), method: :post, local: true do |form| %>
+              <%= form.number_field :amount, value: item.amount, min: 1, step: 1, class: "quantity-input" %>
+              <%= form.submit "Aktualisieren", class: "update-button" %>
+            <% end %>
+
+            <%= button_to "Entfernen", remove_from_cart_path(item), method: :delete, class: "remove-button" %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+
+    <div class="cart-footer">
+      <h3 class="total-price">
+        Gesamt: <%= number_to_currency(@items.sum { |item| item.price * item.amount }, unit: "€") %>
+      </h3>
+
+      <%= link_to "Weiter zum Checkout", checkout_path, class: "checkout-button" %>
+    </div>
+  <% else %>
+    <p>Dein Warenkorb ist derzeit noch leer</p>
+  <% end %>
+</div>

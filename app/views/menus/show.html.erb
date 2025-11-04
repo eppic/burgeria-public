@@ -1,0 +1,24 @@
+<h1 class="menu-title"><%= @menu.name %></h1>
+
+<div class="menu-actions">
+  <%= link_to "Back to menus", menus_path, class: "menu-action-link" %>
+</div>
+
+<div class="menu-items">
+  <% @menu.items.each do |item| %>
+    <div class="category-item">
+      <ul>
+        <div class="category-item-content">
+          <% if item.image.present? %>
+            <%= image_tag "menu/#{item.image}", alt: "#{item.name} image", class: "menu-item-image" %>
+          <% else %>
+            <%= image_tag "placeholder.jpg", alt: "Default image", class: "menu-item-image" %>
+          <% end %>
+        </div>
+        <li class="category-item-name">
+          <%= link_to item.name, item_path(item), class: "menu-item-link" %>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,37 @@
+<h1>Unser Menü</h1>
+<p>Mit Sorgfalt ausgewählt</p>
+
+<div class="categories">
+  <ul class="category-list">
+    <% @menus.each do |menu| %>
+      <li class="category-item">
+        <%= link_to "##{menu.name.parameterize}" do %>
+          <%= image_tag @menu_images[menu.id], alt: "#{menu.name} Category Image", class: "category-image" %>
+          <p><%= menu.name %></p>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<% @menus.each do |menu| %>
+  <div class="menu" id="<%= menu.name.parameterize %>">
+    <h2><%= menu.name %></h2>
+    <ul>
+      <% menu.items.each do |item| %>
+        <li class="menu-item">
+          <%= link_to item_path(item), class: 'item-link' do %>
+            <div class="menu-item-content">
+            <% if item.image.present? %>
+            <%= image_tag "menu/#{item.image}", alt: "Item image" %>
+            <% else %>
+            <%= image_tag "placeholder.jpg", alt: "Default image" %>
+            <% end %>
+            <strong><%= item.name %></strong><br>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

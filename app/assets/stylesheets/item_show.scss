@@ -1,0 +1,36 @@
+.item-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2rem 0 2rem;
+    background-color: var(--background-color);
+    border-radius: 12px;
+}
+
+.item-text {
+    flex: 1;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.item-text strong {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.item-text form {
+    margin-top: 1rem;
+}
+
+.item-text a:hover {
+    background-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .item-page {
+        flex-direction: column;
+        text-align: center;
+    }
+}

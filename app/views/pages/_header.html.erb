@@ -1,5 +1,5 @@
 <header>
-    <a href="/"><%= image_tag "burgeria-full.svg", alt: "Logo" %></a>
+    <a href="<%= root_path %>"><%= image_tag "burgeria-full.svg", alt: "Logo" %></a>
     <nav>
         <label for='burger-menu' tabindex="0" id="burger-icon">
             <%= image_tag "Menu.svg", alt: "Menu" %>
@@ -7,9 +7,12 @@
         <input type='checkbox' id='burger-menu'>
         <ul>
             <li><%= link_to "Unser Menü", menus_path %></li>
-            <li><%= link_to "Reservierung", reservations_path %></li>
+            <% unless static_export? %>
+              <li><%= link_to "Reservierung", reservations_path %></li>
+            <% end %>
             <li><%= link_to "Über uns", about_path %></li>
 
+            <% unless static_export? %>
             <li>
                 <%= link_to show_cart_path do %>
                     <%= image_tag("cart.svg", alt: "Warenkorb") %>
@@ -18,6 +21,7 @@
                     <% end %>
                 <% end %>
             </li>
+            <% end %>
         </ul>
     </nav>
 </header>

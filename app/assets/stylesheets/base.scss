@@ -42,3 +42,16 @@
     font-family: 'Inter';
     src: url('Inter-VariableFont.ttf') format('truetype');
 }
+
+#static-banner {
+    padding: 0.5rem 1rem;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    text-align: center;
+    font-size: 0.875rem;
+
+    a {
+        color: inherit;
+        text-decoration: underline;
+    }
+}

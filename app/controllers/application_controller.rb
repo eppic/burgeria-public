@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   before_action :cleanup_orphaned_order
-  helper_method :cart_item_count
+  helper_method :cart_item_count, :static_export?
 
   private
 
@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
       order = Order.find_by(id: order_id)
       order&.destroy
     end
+  end
+
+  # True while building the static GitHub Pages snapshot: hides ordering and reservations.
+  def static_export?
+    ENV["STATIC_EXPORT"].present?
   end
 
   def cart_item_count

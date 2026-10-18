@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Builds a static snapshot of the public pages into _site/ for GitHub Pages.
+# Requires a running Postgres reachable via config/database.yml (development).
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+export RAILS_ENV=development
+export STATIC_EXPORT=1
+export RAILS_RELATIVE_URL_ROOT="${RAILS_RELATIVE_URL_ROOT:-/burgeria-public}"
+PORT="${PORT:-3123}"
+BASE="http://localhost:${PORT}${RAILS_RELATIVE_URL_ROOT}"
+
+# Creates, migrates and (on a fresh database) seeds
+bin/rails db:prepare
+bin/rails assets:precompile
+
+rm -f tmp/pids/server.pid
+bin/rails server -p "$PORT" -P tmp/pids/export.pid > log/static-export.log 2>&1 &
+trap 'kill "$(cat tmp/pids/export.pid)" 2>/dev/null || true' EXIT
+
+for _ in $(seq 60); do
+  curl -sf "${BASE}/up" > /dev/null && break
+  sleep 1
+done
+curl -sf "${BASE}/up" > /dev/null
+
+rm -rf _site
+# wget exits 8 if any link 404s; we check the result ourselves below
+wget --mirror --page-requisites --adjust-extension --no-verbose \
+  --no-host-directories --cut-dirs=1 --directory-prefix=_site \
+  --reject-regex '(cart|checkout|reservations|\.json|/up$)' \
+  "${BASE}/" || true
+
+test -f _site/index.html
+test -f _site/menus.html
+
+# Copy all compiled assets (importmap modules, fonts, images) and public files
+mkdir -p _site/assets
+cp -r public/assets/. _site/assets/
+cp public/icon.png public/icon.svg public/404.html public/robots.txt _site/
+touch _site/.nojekyll
+
+bin/rails assets:clobber
+echo "Static site written to _site/ ($(find _site -name '*.html' | wc -l) HTML pages)"

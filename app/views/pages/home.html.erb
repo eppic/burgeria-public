@@ -25,5 +25,7 @@
     <h2>Über uns</h2>
     <%= image_tag "home-2.jpg", alt: "Bild von einem Restaurant, innen." %>
     <p>Unsere Burgeria befindet sich in einem lebendigen Viertel, in dem sich urbane Street-Art und gemütliche Cafés an jeder Ecke tummeln. Von außen lockt dich unser freundliches, farbenfrohes Design; innen erwartet dich eine offene Raumgestaltung mit Holztischen und großen Fenstern. Wenn du bei uns Platz nimmst, hast du einen Blick auf die pulsierende Straße und kannst das Treiben in der Nachbarschaft beobachten. Dank der zentralen Lage sind wir leicht zu erreichen und bleiben dennoch ein entspannter Rückzugsort, um saftige Burger und gute Gesellschaft zu genießen.</p>
-    <%= button_to "Jetzt Reservieren!", reservations_path, method: :get, class: "button" %>
+    <% unless static_export? %>
+      <%= button_to "Jetzt Reservieren!", reservations_path, method: :get, class: "button" %>
+    <% end %>
 </section>

@@ -19,6 +19,7 @@
     <strong>Allergene:</strong> <%= @item.allergies.join(', ') %><br>
     <strong>Preis:</strong> €<%= @item.price %><br>
 
+    <% unless static_export? %>
     <%= form_with url: add_to_cart_path(@item), method: :post, local: true, id: "add-button" do |form| %>
       <strong>Menge:</strong> 
       <%= form.number_field :amount, value: 1, min: 1, max: 99, step: 1 %>
@@ -26,11 +27,14 @@
     <% end %>
     <div id="order-message" style="display:none">Bestellung hinzugefügt!</div>
   <%= link_to "Gehe zum Warenkorb", show_cart_path %>
+    <% end %>
   </div>
 </div>
 
+<% unless static_export? %>
 <script>
   document.getElementById("add-button").addEventListener("submit", function(event) {
     document.getElementById("order-message").style.display = "block";
   });
 </script>
+<% end %>

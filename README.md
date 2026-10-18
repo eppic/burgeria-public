@@ -2,7 +2,7 @@
 
 ![Icon](public/icon.svg)
 
-This project was made at FH Salzburg in collaboration with Luca T. It is fully made in Ruby on Rails 3.3.5.
+This project was made at FH Salzburg in collaboration with Luca T. It is fully made in Ruby 3.3.5 on Rails 7.2
 
 ## Screenshots
 
